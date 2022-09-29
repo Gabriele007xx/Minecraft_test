@@ -1,16 +1,19 @@
 package phys;
 
+import entity.Entity;
+
 public class AABB {
     private double minX;
     private double maxX;
     private double minY;
     private double maxY;
+    private double sizeX;
+    private double sizeY;
     public AABB(double x, double y)
     {
-        this.minX -= x;
-        this.maxX += x;
-        this.minY -= y;
-        this.maxY += y;
+        this.sizeX = x;
+        this.sizeY = y;
+
     }
     public boolean intersects(AABB box)
     {
@@ -28,4 +31,17 @@ public class AABB {
     public double getMaxY() {
         return maxY;
     }
+
+    @Override
+    public String toString() {
+        return "MinX: " + minX + " MaxX: " + maxX + " MinY: " + minY + "MaxY: " + maxY;
+    }
+    public void Update(Entity entity)
+    {
+        this.maxX = entity.getX() + sizeX;
+        this.maxY = entity.getY() + sizeY;
+        this.minX = entity.getX() - sizeX;
+        this.minY = entity.getY() - sizeY;
+    }
+
 }

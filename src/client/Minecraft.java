@@ -1,6 +1,7 @@
 package client;
 
 import entity.Entity;
+import entity.Zombie;
 import entity.player.Movable;
 import entity.player.Player;
 import ui.Hotbar;
@@ -40,6 +41,10 @@ public class Minecraft {
         initLevel();
         player = new Player(level, textures.get("player"));
         entities.add(player);
+        Zombie test = new Zombie(level, textures.get("zombie"));
+        test.setLocation(400,400);
+        player.setLocation(200,200);
+        entities.add(test);
         Timer.clock.restart();
     }
     public void run()
@@ -61,6 +66,15 @@ public class Minecraft {
         if(Timer.clock.getElapsedTime().asSeconds() >= 1f/Timer.TICK_PER_SECOND)
         {
             movable.Update(player);
+            System.out.println();
+            for(Entity e : entities)
+            {
+                e.tick();
+            }
+            if(player.getAABB().intersects(entities.get(1).getAABB()))
+            {
+                System.out.println("Collisione");
+            }
         }
 
     }
@@ -89,7 +103,13 @@ public class Minecraft {
             throw new RuntimeException(e);
         }
         textures.put("player", player);
-
+        Texture zombie = new Texture();
+        try {
+            zombie.loadFromFile(Paths.get("assets/graphics/entity/zombie.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        textures.put("zombie", zombie);
         Texture village_base = new Texture();
         try {
             village_base.loadFromFile(Paths.get("assets/graphics/world/village.png"));

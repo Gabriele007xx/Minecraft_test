@@ -42,10 +42,7 @@ public abstract class Entity {
      */
     public void tick()
     {
-        this.Xmax = this.getX() + aabb.getMaxX();
-        this.Ymax = this.getY() + aabb.getMaxY();
-        this.Xmin = this.getX() - aabb.getMaxX();
-        this.Ymin = this.getY() - aabb.getMaxY();
+        aabb.Update(this);
     }
     public void setLocation(float x,float y)
     {
@@ -58,5 +55,9 @@ public abstract class Entity {
     public void render(RenderTarget target)
     {
         target.draw(this.sprite);
+    }
+
+    public AABB getAABB() {
+        return aabb;
     }
 }
