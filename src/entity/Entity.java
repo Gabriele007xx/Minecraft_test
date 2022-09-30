@@ -58,4 +58,9 @@ public abstract class Entity {
     public AABB getAABB() {
         return aabb;
     }
+
+    public double DistanceTo(Entity e1,Entity e2)
+    {
+        return Math.sqrt(Math.pow(e2.getX() - e1.getX(), 2) + Math.pow(e2.getY() - e1.getY(),2));
+    }
 }

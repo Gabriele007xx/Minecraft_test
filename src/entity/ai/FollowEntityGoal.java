@@ -4,11 +4,13 @@ import entity.LivingEntity;
 
 public class FollowEntityGoal extends Goal {
     private LivingEntity entity;
-    private Class entityToFollow;
+    private LivingEntity target;
+
+    private final Class targetType;
     public FollowEntityGoal(LivingEntity entity, Class entityToFollow)
     {
         this.entity = entity;
-        this.entityToFollow = entityToFollow;
+        this.targetType = entityToFollow;
     }
     @Override
     public boolean canUse() {
@@ -17,12 +19,17 @@ public class FollowEntityGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return true;
+
+        return entity.DistanceTo(entity, target) <= 32*32;
     }
 
     @Override
     public void tick() {
         super.tick();
+
+    }
+    private void FindTarget()
+    {
 
     }
 }

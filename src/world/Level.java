@@ -1,8 +1,11 @@
 package world;
 
+import entity.Entity;
+import org.jetbrains.annotations.Nullable;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
+import phys.Vec2;
 
 import java.util.ArrayList;
 
@@ -12,6 +15,7 @@ private int layers;
 private int gridSize;
 private Vector2i map_size = new Vector2i(50,50);
 private ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
+public ArrayList<Entity> entities = new ArrayList<>();
 public Level(Texture texture)
 {
     this.gridSizeFloat = 32.0f;
@@ -42,5 +46,20 @@ public Level(Texture texture)
                 }
             }
         }
+    }
+
+    @Nullable
+    public <T extends Entity> T findNearestEntity(Vec2 point, double range,Class type)
+    {
+        if(entities.get(0) instanceof T)
+        {
+
+        }
+        double dist1 = entities.get(0).DistanceTo(entities.get, point) >=)
+        for(Entity e : entities)
+        {
+
+        }
+        return null;
     }
 }

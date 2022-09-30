@@ -30,7 +30,7 @@ public class Minecraft {
     private Hotbar hotbar = new Hotbar();
     public int ID_selected;
     private Vector2f mousepos;
-    public ArrayList<Entity> entities = new ArrayList<>();
+
     private Level level;
     public Player player;
     private Movable movable = new Movable();
@@ -40,11 +40,11 @@ public class Minecraft {
         initTex();
         initLevel();
         player = new Player(level, textures.get("player"));
-        entities.add(player);
+        level.entities.add(player);
         Zombie test = new Zombie(level, textures.get("zombie"));
         test.setLocation(400,400);
         player.setLocation(200,200);
-        entities.add(test);
+        level.entities.add(test);
         Timer.clock.restart();
     }
     public void run()
@@ -67,11 +67,11 @@ public class Minecraft {
         {
             movable.Update(player);
             System.out.println();
-            for(Entity e : entities)
+            for(Entity e : level.entities)
             {
                 e.tick();
             }
-            if(player.getAABB().intersects(entities.get(1).getAABB()))
+            if(player.getAABB().intersects(level.entities.get(1).getAABB()))
             {
                 System.out.println("Collisione");
             }
@@ -82,7 +82,7 @@ public class Minecraft {
     {
         window.clear();
         level.render(window);
-        for(Entity e : entities)
+        for(Entity e : level.entities)
         {
             e.render(window);
         }
