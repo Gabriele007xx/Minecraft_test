@@ -15,10 +15,8 @@ public abstract class Entity {
     protected AABB aabb;
     protected Texture texture = new Texture();
     protected Sprite sprite = new Sprite();
-    protected double Xmax;
-    protected double Ymax;
-    protected double Xmin;
-    protected double Ymin;
+    protected int HURT_COOLDOWN = 25;
+    protected int CURENT_HURTING_COOLDOWN = 0;
     public Entity(Level level, Texture texture)
     {
         this.level = level;
